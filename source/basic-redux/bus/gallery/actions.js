@@ -1,5 +1,5 @@
 // Types
-import { SHOW_NEXT_PHOTO, SHOW_SELECTED_PHOTO } from "./types";
+import { SHOW_NEXT_PHOTO, SHOW_SELECTED_PHOTO, SHOW_PREVIOUS_PHOTO } from "./types";
 
 export const showNextPhoto = () => {
     return {
@@ -11,5 +11,11 @@ export const showSelectedPhoto = (photoSelected) => {
     return {
         type:    SHOW_SELECTED_PHOTO,
         payload: photoSelected,
+    };
+};
+
+export const showPreviousPhoto = () => {
+    return {
+        type: SHOW_PREVIOUS_PHOTO,
     };
 };
