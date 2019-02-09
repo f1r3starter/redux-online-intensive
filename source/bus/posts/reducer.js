@@ -1,8 +1,8 @@
 // Core
-import { fromJS, List } from "immutable";
+import { fromJS, List } from 'immutable';
 
 // Instruments
-import { types } from "./types";
+import { types } from './types';
 
 const initialState = List();
 

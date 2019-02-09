@@ -1,8 +1,8 @@
 // Core
-import { Map } from "immutable";
+import { Map } from 'immutable';
 
 // Types
-import { types } from "./types";
+import { types } from './types';
 
 const initialState = Map({
     isFetching: false,

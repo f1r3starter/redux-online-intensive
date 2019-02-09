@@ -1,9 +1,9 @@
 // Core
-import { applyMiddleware, compose } from "redux";
+import { applyMiddleware, compose } from 'redux';
 
 // Middleware
-import { createLogger } from "redux-logger/src";
-import { customThunk } from "./custom";
+import { createLogger } from 'redux-logger/src';
+import { customThunk } from './custom';
 import createSagaMiddleware from 'redux-saga';
 
 const logger = createLogger({

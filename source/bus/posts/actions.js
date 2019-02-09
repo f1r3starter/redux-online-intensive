@@ -1,5 +1,5 @@
 // Types
-import { types } from "./types";
+import { types } from './types';
 
 export const postsActions = {
     fillPosts: (posts) => {
@@ -8,10 +8,10 @@ export const postsActions = {
             payload: posts,
         };
     },
-    createPost: (comment) => {
+    createPost: (post) => {
         return {
             type:    types.CREATE_POST,
-            payload: comment,
+            payload: post,
         };
     },
     fetchPostsAsync: () => {
@@ -19,10 +19,10 @@ export const postsActions = {
             type: types.FETCH_POSTS_ASYNC,
         };
     },
-    createPostAsync: (comment) => {
+    createPostAsync: (post) => {
         return {
             type:    types.CREATE_POST_ASYNC,
-            payload: comment,
+            payload: post,
         };
     },
 };
