@@ -1,31 +1,34 @@
 // Core
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import FlipMove from 'react-flip-move';
+import FlipMove from "react-flip-move";
 
 // Instruments
-import Styles from './styles.m.css';
-import { mockedProfile } from '../../instruments/mockedData';
+import Styles from "./styles.m.css";
 
 // Components
-import { Composer, Catcher, Post } from '../../components';
+import { Composer, Catcher, Post } from "../../components";
 
 // Actions
-import { postsActions } from '../../bus/posts/actions';
+import { postsActions } from "../../bus/posts/actions";
 
 const mapStateToProps = (state) => {
     return {
-        posts: state.posts,
+        posts:   state.posts,
+        profile: state.profile,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators({
-            fetchPostsAsync: postsActions.fetchPostsAsync,
-            createPostAsync: postsActions.createPostAsync,
-        }, dispatch),
+        actions: bindActionCreators(
+            {
+                fetchPostsAsync: postsActions.fetchPostsAsync,
+                createPostAsync: postsActions.createPostAsync,
+            },
+            dispatch
+        ),
     };
 };
 
@@ -34,11 +37,6 @@ const mapDispatchToProps = (dispatch) => {
     mapDispatchToProps
 )
 export default class Posts extends Component {
-    static defaultProps = {
-        // State
-        profile: mockedProfile,
-    };
-
     componentDidMount () {
         const { actions } = this.props;
 
@@ -50,14 +48,14 @@ export default class Posts extends Component {
 
         const postsJSX = posts.map((post) => {
             return (
-                <Catcher key = { post.get('id') }>
+                <Catcher key = { post.get("id") }>
                     <Post
                         actions = { actions }
-                        author = { post.get('author') }
-                        comment = { post.get('comment') }
-                        created = { post.get('created') }
-                        id = { post.get('id') }
-                        likes = { post.get('likes') }
+                        author = { post.get("author") }
+                        comment = { post.get("comment") }
+                        created = { post.get("created") }
+                        id = { post.get("id") }
+                        likes = { post.get("likes") }
                         profile = { profile }
                     />
                 </Catcher>

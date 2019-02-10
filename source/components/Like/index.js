@@ -1,8 +1,8 @@
 // Core
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 // Instruments
-import Styles from './styles.m.css';
+import Styles from "./styles.m.css";
 
 export default class Like extends Component {
     state = {
@@ -33,7 +33,7 @@ export default class Like extends Component {
     _getLikedByMe = () => {
         const { profile, likes } = this.props;
 
-        return likes.some((like) => like.get('id') === profile.get('id'));
+        return likes.some((like) => like.get("id") === profile.get("id"));
     };
 
     _getLikersList = () => {
@@ -43,9 +43,9 @@ export default class Like extends Component {
         return likes.size && showLikers ? (
             <ul>
                 {likes.map((like) => (
-                    <li key = { like.get('id') }>{`${like.get(
-                        'firstName',
-                    )} ${like.get('lastName')}`}</li>
+                    <li key = { like.get("id") }>{`${like.get(
+                        "firstName"
+                    )} ${like.get("lastName")}`}</li>
                 ))}
             </ul>
         ) : null;
@@ -57,7 +57,7 @@ export default class Like extends Component {
         const likedByMe = this._getLikedByMe();
 
         return likes.size === 1 && likedByMe
-            ? `${profile.get('firstName')} ${profile.get('lastName')}`
+            ? `${profile.get("firstName")} ${profile.get("lastName")}`
             : likes.size === 2 && likedByMe
                 ? `You and ${likes.size - 1} other`
                 : likedByMe

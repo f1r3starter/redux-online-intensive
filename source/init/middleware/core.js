@@ -1,20 +1,20 @@
 // Core
-import { applyMiddleware, compose } from 'redux';
+import { applyMiddleware, compose } from "redux";
 
 // Middleware
-import { createLogger } from 'redux-logger/src';
-import { customThunk } from './custom';
-import createSagaMiddleware from 'redux-saga';
+import { createLogger } from "redux-logger/src";
+import { customThunk } from "./custom";
+import createSagaMiddleware from "redux-saga";
 
 const logger = createLogger({
     duration:  true,
     collapsed: true,
     colors:    {
-        title:     () => '#139BFE',
-        prevState: () => '#1C5FAF',
-        action:    () => '#149945',
-        nextState: () => '#A47104',
-        error:     () => '#FF0005',
+        title:     () => "#139BFE",
+        prevState: () => "#1C5FAF",
+        action:    () => "#149945",
+        nextState: () => "#A47104",
+        error:     () => "#FF0005",
     },
 });
 const sagaMiddleware = createSagaMiddleware();

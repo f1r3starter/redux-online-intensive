@@ -1,6 +1,6 @@
 // Core
-import React from 'react';
-import { Control } from 'react-redux-form';
+import React from "react";
+import { Control } from "react-redux-form";
 
 const Input = (props) => {
     const { disabledStyle, invalidStyle, ...restProps } = props;

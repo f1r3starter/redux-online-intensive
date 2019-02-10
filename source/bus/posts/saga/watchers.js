@@ -1,11 +1,11 @@
 // Core
-import { takeEvery, all, call } from 'redux-saga/effects';
+import { takeEvery, all, call } from "redux-saga/effects";
 
 // Types
-import { types } from '../types';
+import { types } from "../types";
 
 // Workers
-import { createPost, fetchPosts } from './workers';
+import { createPost, fetchPosts } from "./workers";
 
 function* watchCreatePost () {
     yield takeEvery(types.CREATE_POST_ASYNC, createPost);

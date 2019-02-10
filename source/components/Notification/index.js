@@ -1,12 +1,12 @@
 // Core
-import React, { Component } from 'react';
-import { Transition } from 'react-transition-group';
-import gsap from 'gsap';
-import cx from 'classnames';
-import { Map } from 'immutable';
+import React, { Component } from "react";
+import { Transition } from "react-transition-group";
+import gsap from "gsap";
+import cx from "classnames";
+import { Map } from "immutable";
 
 // Instruments
-import Styles from './styles.m.css';
+import Styles from "./styles.m.css";
 
 export default class Notification extends Component {
     static defaultProps = {
@@ -24,7 +24,7 @@ export default class Notification extends Component {
     componentWillUnmount () {
         const { hideNotification, notification } = this.props;
 
-        hideNotification(notification.get('id'));
+        hideNotification(notification.get("id"));
     }
 
     _hideNotification = () => {
@@ -47,20 +47,20 @@ export default class Notification extends Component {
             {
                 opacity:    0,
                 onComplete: () => {
-                    hideNotification(notification.get('id'));
+                    hideNotification(notification.get("id"));
                 },
-            },
+            }
         );
     };
 
     _getComputedMessage = () => {
         const { notification } = this.props;
 
-        const type = notification.get('type');
-        const message = notification.get('message');
-        const source = notification.get('source');
+        const type = notification.get("type");
+        const message = notification.get("message");
+        const source = notification.get("source");
 
-        if (type === 'error') {
+        if (type === "error") {
             return (
                 <span>
                     <span>Error in {source}:</span>
@@ -74,10 +74,10 @@ export default class Notification extends Component {
 
     _getNotificationStyles = () => {
         const { notification } = this.props;
-        const type = notification.get('type');
+        const type = notification.get("type");
 
         return cx(Styles.notification, {
-            [Styles.info]: type === 'info',
+            [Styles.info]: type === "info",
         });
     };
 
@@ -87,7 +87,7 @@ export default class Notification extends Component {
         const computedMessage = this._getComputedMessage();
         const notificationStyles = this._getNotificationStyles();
 
-        const isPresent = this.props.notification.get('id');
+        const isPresent = this.props.notification.get("id");
 
         return isPresent ? (
             <Transition

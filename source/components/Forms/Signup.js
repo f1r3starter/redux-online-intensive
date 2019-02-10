@@ -1,21 +1,31 @@
 // Core
-import React, { Component } from 'react';
-import { Formik, Form, Field } from 'formik';
-import cx from 'classnames';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Formik, Form, Field } from "formik";
+import cx from "classnames";
 
 // Instruments
-import Styles from './styles.m.css';
-import { signup } from '../../bus/forms/shapes';
+import Styles from "./styles.m.css";
+import { signup } from "../../bus/forms/shapes";
 
-export default class SignupForm extends Component {
-    static defaultProps = {
-        // State
-        isFetching: false,
+// Actions
+import { authActions } from "../../bus/auth/actions";
 
-        // Actions
-        signupAsync: () => {},
+const mapStateToProps = (state) => {
+    return {
+        isFetching: state.ui.get("isFetching"),
     };
+};
 
+const mapDispatchToProps = {
+    signupAsync: authActions.signupAsync,
+};
+
+@connect(
+    mapStateToProps,
+    mapDispatchToProps
+)
+export default class SignupForm extends Component {
     _submitSignupForm = (user) => {
         this.props.signupAsync(user);
     };
@@ -29,28 +39,39 @@ export default class SignupForm extends Component {
                 render = { (props) => {
                     const { isValid, touched, errors } = props;
 
-                    const centeredWrapperStyle = cx(Styles.wrapper, Styles.centered, {
-                        [Styles.disabledInput]: isFetching,
-                    });
+                    const centeredWrapperStyle = cx(
+                        Styles.wrapper,
+                        Styles.centered,
+                        {
+                            [Styles.disabledInput]: isFetching,
+                        }
+                    );
                     const firstNameStyle = cx({
-                        [Styles.invalidInput]: !isValid && touched.firstName && errors.firstName,
+                        [Styles.invalidInput]:
+                            !isValid && touched.firstName && errors.firstName,
                     });
                     const lastNameStyle = cx({
-                        [Styles.invalidInput]: !isValid && touched.lastName && errors.lastName,
+                        [Styles.invalidInput]:
+                            !isValid && touched.lastName && errors.lastName,
                     });
                     const emailStyle = cx({
-                        [Styles.invalidInput]: !isValid && touched.email && errors.email,
+                        [Styles.invalidInput]:
+                            !isValid && touched.email && errors.email,
                     });
                     const passwordStyle = cx({
-                        [Styles.invalidInput]: !isValid && touched.password && errors.password,
+                        [Styles.invalidInput]:
+                            !isValid && touched.password && errors.password,
                     });
                     const inviteStyle = cx({
-                        [Styles.invalidInput]: !isValid && touched.invite && errors.invite,
+                        [Styles.invalidInput]:
+                            !isValid && touched.invite && errors.invite,
                     });
                     const buttonStyle = cx(Styles.signupSubmit, {
                         [Styles.disabledButton]: isFetching,
                     });
-                    const buttonMessage = isFetching ? 'Загрузка...' : 'Создать аккаунт ✓';
+                    const buttonMessage = isFetching
+                        ? "Загрузка..."
+                        : "Создать аккаунт ✓";
 
                     return (
                         <Form className = { Styles.form }>
@@ -91,7 +112,10 @@ export default class SignupForm extends Component {
                                         placeholder = 'Секретное слово'
                                         type = 'password'
                                     />
-                                    <button className = { buttonStyle } disabled = { isFetching } type = 'submit'>
+                                    <button
+                                        className = { buttonStyle }
+                                        disabled = { isFetching }
+                                        type = 'submit'>
                                         {buttonMessage}
                                     </button>
                                 </div>

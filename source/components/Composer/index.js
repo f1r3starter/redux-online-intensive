@@ -1,10 +1,10 @@
 // Core
-import React, { Component, createRef } from 'react';
-import { Formik, Form, Field } from 'formik';
+import React, { Component, createRef } from "react";
+import { Formik, Form, Field } from "formik";
 
 // Instruments
-import Styles from './styles.m.css';
-import { composer } from '../../bus/forms/shapes';
+import Styles from "./styles.m.css";
+import { composer } from "../../bus/forms/shapes";
 
 export default class Composer extends Component {
     formikForm = createRef();
@@ -23,7 +23,7 @@ export default class Composer extends Component {
     };
 
     _submitFormOnEnter = (event) => {
-        if (event.key === 'Enter') {
+        if (event.key === "Enter") {
             event.preventDefault();
 
             this.formikForm.current.submitForm();
@@ -40,12 +40,14 @@ export default class Composer extends Component {
                 render = { () => {
                     return (
                         <section className = { Styles.composer }>
-                            <img src = { profile.get('avatar') } />
+                            <img src = { profile.get("avatar") } />
                             <Form>
                                 <Field
                                     component = 'textarea'
                                     name = 'comment'
-                                    placeholder = { `What's on your mind, ${profile.get('firstName')}?` }
+                                    placeholder = { `What's on your mind, ${profile.get(
+                                        "firstName"
+                                    )}?` }
                                     type = 'text'
                                     onKeyPress = { this._submitFormOnEnter }
                                 />
