@@ -1,8 +1,8 @@
 // Core
-import { fromJS, List } from "immutable";
+import { fromJS, List } from 'immutable';
 
 // Instruments
-import { types } from "./types";
+import { types } from './types';
 
 const initialState = List();
 
@@ -13,6 +13,9 @@ export const postsReducer = (state = initialState, action) => {
 
         case types.CREATE_POST:
             return state.unshift(fromJS(action.payload));
+
+        case types.REMOVE_POST:
+            return state.filter((post) => post.get('id') !== action.payload);
 
         default:
             return state;

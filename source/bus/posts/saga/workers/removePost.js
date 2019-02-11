@@ -6,20 +6,19 @@ import { api } from '../../../../REST';
 import { postsActions } from '../../actions';
 import { uiActions } from '../../../ui/actions';
 
-export function* fetchPosts () {
+export function* removePost ({ payload: postId }) {
     try {
         yield put(uiActions.startFetching());
+        const response = yield apply(api, api.posts.remove, [postId]);
 
-        const response = yield apply(api, api.posts.fetch);
-        const { data: posts, message } = yield apply(response, response.json);
-
-        if (response.status !== 200) {
+        if (response.status !== 204) {
+            const { message } = yield apply(response, response.json);
             throw new Error(message);
         }
 
-        yield put(postsActions.fillPosts(posts));
+        yield put(postsActions.removePost(postId));
     } catch (error) {
-        yield put(uiActions.emitError(error, 'fetchPosts worker'));
+        yield put(uiActions.emitError(error, 'removePost worker'));
     } finally {
         yield put(uiActions.stopFetching());
     }

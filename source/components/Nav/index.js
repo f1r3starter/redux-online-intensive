@@ -1,28 +1,35 @@
 // Core
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
-import cx from "classnames";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import cx from 'classnames';
 
 // Instruments
-import Styles from "./styles.m.css";
-import { book } from "../../navigation/book";
+import Styles from './styles.m.css';
+import { book } from '../../navigation/book';
+
+// Actions
+import { authActions } from '../../bus/auth/actions';
 
 const mapStateToProps = (state) => {
     return {
-        isAuthenticated: state.auth.get("isAuthenticated"),
+        isAuthenticated: state.auth.get('isAuthenticated'),
         profile:         state.profile,
     };
 };
 
-@connect(mapStateToProps)
+const mapDispatchToProps = {
+    logoutAsync: authActions.logoutAsync,
+};
+
+@connect(
+    mapStateToProps,
+    mapDispatchToProps
+)
 export default class Nav extends Component {
     static defaultProps = {
         // State
         isOnline: false,
-
-        // Actions
-        logoutAsync: () => {},
     };
 
     _getNav = () => {
@@ -32,8 +39,8 @@ export default class Nav extends Component {
             <>
                 <div>
                     <NavLink activeClassName = { Styles.active } to = { book.profile }>
-                        <img src = { profile.get("avatar") } />
-                        {profile.get("firstName")}
+                        <img src = { profile.get('avatar') } />
+                        {profile.get('firstName')}
                     </NavLink>
                     <NavLink activeClassName = { Styles.active } to = { book.feed }>
                         Стена
@@ -72,7 +79,7 @@ export default class Nav extends Component {
         return (
             <section className = { Styles.navigation }>
                 <div className = { statusStyle }>
-                    <div>{isOnline ? "Онлайн" : "Офлайн"}</div>
+                    <div>{isOnline ? 'Онлайн' : 'Офлайн'}</div>
                     <span />
                 </div>
                 {navigation}

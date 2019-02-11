@@ -7,7 +7,7 @@ import { uiActions } from "../../../ui/actions";
 
 export function* worker () {
     try {
-        yield put(uiActions.startFetching);
+        yield put(uiActions.startFetching());
 
         const response = yield apply(api, api.posts.fetch);
         const { data: posts, message } = yield apply(response, response.json);
@@ -18,6 +18,6 @@ export function* worker () {
     } catch (error) {
         yield put(uiActions.emitError(error, "worker"));
     } finally {
-        yield put(uiActions.stopFetching);
+        yield put(uiActions.stopFetching());
     }
 }

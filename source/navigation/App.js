@@ -1,41 +1,49 @@
 // Core
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { hot } from "react-hot-loader";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { hot } from 'react-hot-loader';
+import { withRouter } from 'react-router-dom';
 
-// Pages
-import { Login, Signup, Feed, NewPassword, Profile } from "../pages";
+// Routes
+import Private from './Private';
+import Public from './Public';
 
-// Instruments
-import { book } from "./book";
+// Components
+import { Loading } from '../components';
+
+// Actions
+import { authActions } from '../bus/auth/actions';
 
 const mapStateToProps = (state) => {
     return {
-        isAuthenticated: state.auth.get("isAuthenticated"),
+        isAuthenticated: state.auth.get('isAuthenticated'),
+        isInitialized:   state.auth.get('isInitialized'),
+    };
+};
+
+const mapDispatchToProps = () => {
+    return {
+        initializeAsync: authActions.initializeAsync,
     };
 };
 
 @hot(module)
 @withRouter
-@connect(mapStateToProps)
+@connect(
+    mapStateToProps,
+    mapDispatchToProps
+)
 export default class App extends Component {
+    componentDidMount () {
+        this.props.initializeAsync();
+    }
     render () {
-        const { isAuthenticated } = this.props;
+        const { isAuthenticated, isInitialized } = this.props;
 
-        return isAuthenticated ? (
-            <Switch>
-                <Route component = { Feed } path = { book.feed } />
-                <Route component = { NewPassword } path = { book.newPassword } />
-                <Route component = { Profile } path = { book.profile } />
-                <Redirect to = { book.feed } />
-            </Switch>
-        ) : (
-            <Switch>
-                <Route component = { Login } path = { book.login } />
-                <Route component = { Signup } path = { book.signUp } />
-                <Redirect to = { book.login } />
-            </Switch>
-        );
+        if (isInitialized) {
+            return <Loading />;
+        }
+
+        return isAuthenticated ? <Private /> : <Public />;
     }
 }
