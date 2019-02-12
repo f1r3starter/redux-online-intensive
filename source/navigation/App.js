@@ -21,10 +21,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = () => {
-    return {
-        initializeAsync: authActions.initializeAsync,
-    };
+const mapDispatchToProps = {
+    initializeAsync: authActions.initializeAsync,
 };
 
 @hot(module)
@@ -40,7 +38,7 @@ export default class App extends Component {
     render () {
         const { isAuthenticated, isInitialized } = this.props;
 
-        if (isInitialized) {
+        if (!isInitialized) {
             return <Loading />;
         }
 
