@@ -13,6 +13,7 @@ export function* unlikePost ({ payload: postId }) {
 
         if (response.status !== 204) {
             const { message } = yield apply(response, response.json);
+
             throw new Error(message);
         }
 
