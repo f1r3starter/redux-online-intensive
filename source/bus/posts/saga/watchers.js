@@ -27,7 +27,6 @@ function* watchUnlikePost () {
     yield takeEvery(types.UNLIKE_POST_ASYNC, unlikePost);
 }
 
-
 export function* watchPosts () {
     yield all([call(watchCreatePost), call(watchFetchPosts), call(watchRemovePost), call(watchLikePost), call(watchUnlikePost)]);
 }
