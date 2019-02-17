@@ -1,10 +1,10 @@
 // Core
-import { put, apply, select } from 'redux-saga/effects';
+import { put, apply, select } from "redux-saga/effects";
 
 // Instruments
-import { api } from '../../../../REST';
-import { postsActions } from '../../actions';
-import { uiActions } from '../../../ui/actions';
+import { api } from "../../../../REST";
+import { postsActions } from "../../actions";
+import { uiActions } from "../../../ui/actions";
 
 export function* likePost ({ payload: postId }) {
     try {
@@ -18,12 +18,12 @@ export function* likePost ({ payload: postId }) {
         }
 
         const liker = yield select((state) => {
-            return state.profile.removeAll(['avatar', 'token']);
+            return state.profile.removeAll(["avatar", "token"]);
         });
 
         yield put(postsActions.likePost({ liker, postId }));
     } catch (error) {
-        yield put(uiActions.emitError(error, 'likePost worker'));
+        yield put(uiActions.emitError(error, "likePost worker"));
     } finally {
         yield put(uiActions.stopFetching());
     }

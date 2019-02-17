@@ -1,8 +1,8 @@
 // Core
-import { Map } from 'immutable';
+import { Map } from "immutable";
 
 // Types
-import { types } from './types';
+import { types } from "./types";
 
 const initialState = Map({
     isAuthenticated: false,
@@ -12,13 +12,13 @@ const initialState = Map({
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.AUTHENTICATE:
-            return state.set('isAuthenticated', true);
+            return state.set("isAuthenticated", true);
 
         case types.INITIALIZE:
-            return state.set('isInitialized', true);
+            return state.set("isInitialized", true);
 
         case types.LOGOUT:
-            return state.set('isAuthenticated', false);
+            return state.set("isAuthenticated", false);
 
         default:
             return state;

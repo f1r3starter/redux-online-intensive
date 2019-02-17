@@ -1,10 +1,10 @@
 // Core
-import { put, apply } from 'redux-saga/effects';
+import { put, apply } from "redux-saga/effects";
 
 // Instruments
-import { api } from '../../../../REST';
-import { postsActions } from '../../actions';
-import { uiActions } from '../../../ui/actions';
+import { api } from "../../../../REST";
+import { postsActions } from "../../actions";
+import { uiActions } from "../../../ui/actions";
 
 export function* removePost ({ payload: postId }) {
     try {
@@ -19,7 +19,7 @@ export function* removePost ({ payload: postId }) {
 
         yield put(postsActions.removePost(postId));
     } catch (error) {
-        yield put(uiActions.emitError(error, 'removePost worker'));
+        yield put(uiActions.emitError(error, "removePost worker"));
     } finally {
         yield put(uiActions.stopFetching());
     }
