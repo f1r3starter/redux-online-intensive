@@ -1,7 +1,7 @@
 // Core
 import { apply } from "redux-saga/effects";
 import { actions } from "react-redux-form";
-import {expectSaga} from "redux-saga-test-plan";
+import { expectSaga } from "redux-saga-test-plan";
 
 // Instruments
 import { api } from "../../../REST";
@@ -10,20 +10,25 @@ import { uiActions } from "../../ui/actions";
 import { profileActions } from "../../profile/actions";
 import { authenticate } from "../saga/workers";
 
-describe('authenticate saga:', () => {
-    test('should complete a 200 status response scenario', async () => {
+describe("authenticate saga:", () => {
+    test("should complete a 200 status response scenario", async () => {
         await expectSaga(authenticate)
             .put(uiActions.startFetching())
-            .provide([[apply(api, api.auth.authenticate), __.fetchResponseSuccess]])
-            .apply(localStorage, localStorage.setItem, [
-                "token",
-                __.token
+            .provide([
+                [apply(api, api.auth.authenticate), __.fetchResponseSuccess]
             ])
+            .apply(localStorage, localStorage.setItem, ["token", __.token])
             .put(
-                actions.change("forms.user.profile.firstName", __.userProfile.firstName)
+                actions.change(
+                    "forms.user.profile.firstName",
+                    __.userProfile.firstName
+                )
             )
             .put(
-                actions.change("forms.user.profile.lastName", __.userProfile.lastName)
+                actions.change(
+                    "forms.user.profile.lastName",
+                    __.userProfile.lastName
+                )
             )
             .put(profileActions.fillProfile(__.userProfile))
             .put(authActions.authenticate())
@@ -32,10 +37,12 @@ describe('authenticate saga:', () => {
             .run();
     });
 
-    test('should complete a 401 status response scenario', async () => {
+    test("should complete a 401 status response scenario", async () => {
         await expectSaga(authenticate)
             .put(uiActions.startFetching())
-            .provide([[apply(api, api.auth.authenticate), __.fetchResponseFail401]])
+            .provide([
+                [apply(api, api.auth.authenticate), __.fetchResponseFail401]
+            ])
             .apply(localStorage, localStorage.removeItem, ["token"])
             .apply(localStorage, localStorage.removeItem, ["remember"])
             .returns(null)
@@ -44,11 +51,13 @@ describe('authenticate saga:', () => {
             .run();
     });
 
-    test('should complete a 400 status response scenario', async () => {
+    test("should complete a 400 status response scenario", async () => {
         await expectSaga(authenticate)
             .put(uiActions.startFetching())
-            .provide([[apply(api, api.auth.authenticate), __.fetchResponseFail400]])
-            .put(uiActions.emitError(__.error, 'authenticate worker'))
+            .provide([
+                [apply(api, api.auth.authenticate), __.fetchResponseFail400]
+            ])
+            .put(uiActions.emitError(__.error, "authenticate worker"))
             .put(uiActions.stopFetching())
             .put(authActions.initialize())
             .run();
