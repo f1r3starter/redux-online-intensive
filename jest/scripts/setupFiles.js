@@ -35,6 +35,10 @@ const fetchResponseSuccess = {
     json:   jest.fn(() => Promise.resolve(responseDataSuccess)),
 };
 
+const fetchResponseSuccess204 = {
+    status: 204,
+};
+
 const fetchResponseFail401 = {
     status: 401,
     json:   jest.fn(() => Promise.resolve(responseDataFail)),
@@ -47,6 +51,35 @@ const fetchResponseFail400 = {
 
 const url = 'https://www.url.com';
 
+const newName = {
+    firstName: 'Walter',
+    lastName:  'White',
+};
+
+const newAvatar = ['avatar'];
+
+const newPassword = {
+    oldPassword: 12345,
+    newPassword: 123456,
+};
+
+const users = [
+    {
+        'id':        'TEST_ID',
+        'firstName': 'Walter',
+        'lastName':  'White',
+        'avatar':    'TEST_AVATAR',
+    },
+    {
+        'id':        'TEST_ID2',
+        'firstName': 'Jessie',
+        'lastName':  'Pinkman',
+        'avatar':    'TEST_AVATAR2',
+    }
+];
+
+const meta = '123';
+
 global.__ = {
     userProfile,
     errorMessage,
@@ -55,10 +88,16 @@ global.__ = {
     responseDataSuccess,
     responseDataFail,
     fetchResponseSuccess,
+    fetchResponseSuccess204,
     fetchResponseFail401,
     fetchResponseFail400,
     credentials,
     url,
+    users,
+    newName,
+    newAvatar,
+    newPassword,
+    meta,
 };
 global.fetch = fetch;
 global.localStorage = new LocalStorage();
